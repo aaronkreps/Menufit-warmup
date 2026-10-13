@@ -144,6 +144,12 @@ footer { font-size: 0.9rem; color: var(--muted); }
 .brand-text { display: flex; flex-direction: column; gap: 0.1rem; }
 .brand-name { font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; line-height: 1; }
 
+/* Posting steps */
+.steps { list-style: none; padding: 0; margin: 0; counter-reset: step; display: flex; flex-direction: column; gap: 0.75rem; }
+.steps li { counter-increment: step; display: grid; grid-template-columns: 2.25rem 1fr; gap: 0.85rem; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1rem; }
+.steps li::before { content: counter(step); display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--warn-soft); color: var(--warn); font-family: var(--font-display); font-weight: 800; }
+.steps li > div { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
+
 /* Views impact */
 .impact { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .impact-num { flex: 1 1 10rem; display: flex; flex-direction: column; gap: 0.1rem; }
@@ -247,6 +253,17 @@ footer { font-size: 0.9rem; color: var(--muted); }
       <button type="button" class="reset" id="reset">Clear ticks</button>
     </div>
     <p id="ready" hidden>You're ready to upload your first video.</p>
+  </section>
+
+  <section id="post">
+    <p class="eyebrow">After warmup</p>
+    <h2>Time to post</h2>
+    <p>Your accounts are warmed up. Here's how to start posting.</p>
+    <ol class="steps">
+      <li><div><h3>Find the 5 formats</h3><p>The MenuFit creator website in the <b>Discord</b> has 5 video formats to choose from.</p></div></li>
+      <li><div><h3>Send your first one for review</h3><p>The first time you make each format, send the video to <b>Aaron</b> on <b>Discord</b> or <b>SideShift</b> before posting it.</p></div></li>
+      <li><div><h3>Post</h3><p>You only need a review once per format. After that, you're good to post that format whenever you're ready.</p></div></li>
+    </ol>
   </section>
 
   <footer>MenuFit creator program · Account warmup requirements</footer>
