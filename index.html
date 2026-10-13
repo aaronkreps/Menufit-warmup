@@ -150,12 +150,15 @@ footer { font-size: 0.9rem; color: var(--muted); }
 .steps li::before { content: counter(step); display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--warn-soft); color: var(--warn); font-family: var(--font-display); font-weight: 800; }
 .steps li > div { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
 
-/* Creator site callout */
-.hub { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1.2rem; }
-.hub-text { display: flex; flex-direction: column; gap: 0.4rem; min-width: 0; flex: 1 1 18rem; }
-.hub-text .handles { margin-top: 0.2rem; }
-.hub-link { display: inline-block; font-weight: 700; text-decoration: none; background: var(--warn-soft); color: var(--warn); padding: 0.55rem 1rem; border-radius: 999px; white-space: nowrap; }
-.hub-link.soon { background: transparent; color: var(--muted); border: 1px dashed var(--line); font-weight: 400; }
+/* Creator site callout: inverted white card so it is the first thing people notice */
+.hub { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; background: var(--warn-soft); color: var(--warn); border-radius: 16px; padding: 1.4rem; box-shadow: 0 10px 30px rgba(4, 20, 70, 0.35); }
+.hub-text { display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; flex: 1 1 18rem; }
+.hub-text h3 { font-size: 1.45rem; font-weight: 800; }
+.hub-text p { font-size: 1.05rem; }
+.hub .tag { align-self: flex-start; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; background: var(--warn); color: var(--warn-soft); padding: 0.2rem 0.65rem; border-radius: 999px; }
+.hub .handles code { background: var(--warn); color: var(--warn-soft); border-color: var(--warn); font-weight: 700; }
+.hub-link { display: inline-block; font-weight: 700; text-decoration: none; background: var(--warn); color: var(--warn-soft); padding: 0.65rem 1.2rem; border-radius: 999px; white-space: nowrap; }
+.hub-link.soon { background: transparent; color: var(--warn); border: 2px dashed var(--warn); }
 
 /* Views impact */
 .impact { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
@@ -188,8 +191,9 @@ footer { font-size: 0.9rem; color: var(--muted); }
 
   <div class="hub">
     <div class="hub-text">
+      <span class="tag">Start here</span>
       <h3>The MenuFit creator site</h3>
-      <p>Your one-stop shop for everything you need to make videos.</p>
+      <p>Your one-stop shop for everything you need to make videos. Bookmark it, you'll use it for every post.</p>
       <div class="handles"><code>Formats</code><code>Visuals</code><code>Scripts</code><code>CTAs</code></div>
     </div>
     <!-- Replace this span with <a class="hub-link" href="CREATOR-SITE-URL">Open the creator site</a> once the site is live. -->
