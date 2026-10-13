@@ -138,6 +138,12 @@ button.reset:hover { color: var(--fg); border-color: var(--muted); }
 footer { font-size: 0.9rem; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
 
+/* Brand row */
+.brand { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.75rem; }
+.brand img { width: 56px; height: 56px; border-radius: 14px; box-shadow: 0 6px 18px rgba(4, 20, 70, 0.35); }
+.brand-text { display: flex; flex-direction: column; gap: 0.1rem; }
+.brand-name { font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; line-height: 1; }
+
 /* Views impact */
 .impact { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .impact-num { flex: 1 1 10rem; display: flex; flex-direction: column; gap: 0.1rem; }
@@ -159,7 +165,10 @@ footer { font-size: 0.9rem; color: var(--muted); }
 <main class="wrap">
 
   <header>
-    <p class="eyebrow">MenuFit creator onboarding</p>
+    <div class="brand">
+      <img src="logo.jpg" alt="MenuFit app icon" width="56" height="56">
+      <div class="brand-text"><span class="brand-name">MenuFit</span><p class="eyebrow">Creator onboarding</p></div>
+    </div>
     <h1>Warm up your accounts before you post</h1>
     <p class="lede">Before your first post, spend a few days using your new accounts the way a fan of healthy eating out and fitness would. This trains the algorithm to show your videos to the right people.</p>
   </header>
