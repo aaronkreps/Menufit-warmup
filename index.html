@@ -19,12 +19,18 @@
   --accent-soft: #3466e0;
   --warn: #1747c9;
   --warn-soft: #ffffff;
+  --bg-edge: #0c2a80;
   --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
+/* Fixed vignette: the page fades to a deeper blue toward the screen edges. */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse 85% 75% at 50% 45%, var(--bg) 35%, var(--bg-edge) 100%);
+}
 body {
   margin: 0;
   background: var(--bg);
