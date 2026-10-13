@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MenuFit Account Warmup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+/* Layout: one readable column, a facts strip, a day-by-day timeline, two-column do/don't, and a tickable final checklist. */
+:root {
+  --bg: #f6f8f5;
+  --surface: #ffffff;
+  --fg: #18221b;
+  --muted: #536257;
+  --line: #d9e2da;
+  --accent: #1f7a45;
+  --accent-soft: #e2f1e6;
+  --warn: #b23a2a;
+  --warn-soft: #fbe9e5;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111713; --surface: #18201a; --fg: #e6ede7; --muted: #9db0a2; --line: #2b372e;
+    --accent: #5cc98a; --accent-soft: #1d3326; --warn: #f08a78; --warn-soft: #3a211d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111713; --surface: #18201a; --fg: #e6ede7; --muted: #9db0a2; --line: #2b372e;
+  --accent: #5cc98a; --accent-soft: #1d3326; --warn: #f08a78; --warn-soft: #3a211d;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+.wrap {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding-inline: 1.25rem;
+  padding-block: 2.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.1rem, 6vw, 3rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.01em; }
+h3 { font-size: 1.15rem; font-weight: 600; }
+p { margin: 0; }
+ul { margin: 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.4rem; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+.eyebrow {
+  font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent);
+}
+section { display: flex; flex-direction: column; gap: 1rem; }
+.lede { font-size: 1.15rem; color: var(--muted); max-width: 38rem; }
+
+header { display: flex; flex-direction: column; gap: 0.9rem; }
+
+/* Facts strip */
+.facts {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+}
+.fact { background: var(--surface); padding: 1rem; display: flex; flex-direction: column; gap: 0.15rem; }
+.fact b { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.fact span { font-size: 0.9rem; color: var(--muted); line-height: 1.35; }
+@media (max-width: 560px) { .facts { grid-template-columns: repeat(2, 1fr); } }
+
+/* Setup list */
+.setup { list-style: none; padding: 0; gap: 0.9rem; }
+.setup li { display: grid; grid-template-columns: 1.6rem 1fr; gap: 0.6rem; }
+.setup li::before { content: "✓"; color: var(--accent); font-weight: 700; }
+.setup li > div { min-width: 0; }
+.handles { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.4rem; }
+.handles code {
+  font-family: var(--font-body); font-size: 0.95rem; background: var(--accent-soft); color: var(--fg);
+  padding: 0.15rem 0.55rem; border-radius: 999px;
+}
+
+/* Timeline */
+.timeline { list-style: none; padding: 0; gap: 0; }
+.day { display: grid; grid-template-columns: 4.5rem 1fr; gap: 1rem; padding-block: 1.1rem; border-top: 1px solid var(--line); }
+.day:last-child { border-bottom: 1px solid var(--line); }
+.day-label { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; color: var(--accent); }
+.day-label small { display: block; font-family: var(--font-body); font-weight: 400; font-size: 0.85rem; color: var(--muted); }
+.day-body { display: flex; flex-direction: column; gap: 0.4rem; min-width: 0; }
+.day.go { background: var(--accent-soft); border-radius: 10px; border-top-color: transparent; padding-inline: 0.75rem; margin-top: 0.5rem; }
+.day.go + .day, .day.go:last-child { border-bottom: 0; }
+
+.searches { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.searches span {
+  font-size: 0.9rem; border: 1px solid var(--line); background: var(--surface); padding: 0.1rem 0.6rem; border-radius: 6px;
+}
+
+/* Do / don't */
+.rules { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.rule-col { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1.2rem; display: flex; flex-direction: column; gap: 0.75rem; min-width: 0; }
+.rule-col h3 { display: flex; align-items: center; gap: 0.5rem; }
+.pill { font-family: var(--font-body); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.15rem 0.55rem; border-radius: 999px; }
+.pill.do { background: var(--accent-soft); color: var(--accent); }
+.pill.dont { background: var(--warn-soft); color: var(--warn); }
+@media (max-width: 620px) { .rules { grid-template-columns: 1fr; } }
+
+/* Checklist */
+.checklist { list-style: none; padding: 0; gap: 0.25rem; }
+.checklist label {
+  display: grid; grid-template-columns: 1.5rem 1fr; gap: 0.7rem; align-items: start;
+  padding: 0.6rem 0.75rem; border-radius: 8px; cursor: pointer;
+}
+.checklist label:hover { background: var(--accent-soft); }
+.checklist input { width: 1.2rem; height: 1.2rem; margin-top: 0.2rem; accent-color: var(--accent); }
+.checklist input:checked + span { color: var(--muted); text-decoration: line-through; }
+.progress-row { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+.bar { flex: 1 1 12rem; height: 8px; background: var(--line); border-radius: 999px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.25s ease; }
+#progress-text { font-size: 0.95rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+#ready { font-weight: 700; color: var(--accent); }
+button.reset {
+  font: inherit; font-size: 0.9rem; color: var(--muted); background: none; border: 1px solid var(--line);
+  border-radius: 6px; padding: 0.2rem 0.7rem; cursor: pointer;
+}
+button.reset:hover { color: var(--fg); border-color: var(--muted); }
+
+.callout {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1.2rem;
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+footer { font-size: 0.9rem; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header>
+    <p class="eyebrow">MenuFit creator onboarding</p>
+    <h1>Warm up your accounts before you post</h1>
+    <p class="lede">New accounts that post right away get very little reach. Spend five days using your new accounts like a normal person who loves food, so TikTok and Instagram learn what your page is about. Then your first MenuFit video lands in front of the right people.</p>
+  </header>
+
+  <div class="facts" role="list">
+    <div class="fact" role="listitem"><b>3</b><span>new accounts: TikTok, Instagram, Facebook</span></div>
+    <div class="fact" role="listitem"><b>5 days</b><span>of warmup before your first post</span></div>
+    <div class="fact" role="listitem"><b>20–30 min</b><span>per day, per app</span></div>
+    <div class="fact" role="listitem"><b>Day 6</b><span>your first MenuFit video goes up</span></div>
+  </div>
+
+  <section id="setup">
+    <p class="eyebrow">Day 1</p>
+    <h2>Create your accounts</h2>
+    <ul class="setup">
+      <li><div><b>Make brand-new accounts</b> on TikTok, Instagram and Facebook. Don't reuse an old or personal page.</div></li>
+      <li><div><b>Pick one username and use it on all three.</b> Combine your name with one of these:
+        <div class="handles"><code>leanwith_</code><code>hacksw</code><code>fitw</code><code>grubw</code><code>_xfit</code><code>_eats</code><code>_fuel</code><code>_gainz</code><code>_getslean</code><code>what_eats</code><code>healthw_</code></div></div></li>
+      <li><div><b>Use a clear photo of your face</b> as the profile picture, and your first name as the display name.</div></li>
+      <li><div><b>Write a short food bio</b>, for example "Healthy orders at the places you already eat 🍔🥗". No links yet.</div></li>
+      <li><div><b>Sign up on your own phone</b> with the app, not a computer. Use your normal Wi-Fi or mobile data, and turn any VPN off.</div></li>
+    </ul>
+  </section>
+
+  <section id="schedule">
+    <p class="eyebrow">Day by day</p>
+    <h2>The 5-day warmup</h2>
+    <p>Do each day on all three apps. Watch videos to the end, and only like or comment on things you actually enjoy.</p>
+    <ol class="timeline">
+      <li class="day">
+        <div class="day-label">Day 1<small>Scroll</small></div>
+        <div class="day-body">
+          <p>Finish your profile. Scroll the For You / Explore feed for 20–30 minutes. Stop on food videos and skip everything else quickly.</p>
+        </div>
+      </li>
+      <li class="day">
+        <div class="day-label">Day 2<small>Follow</small></div>
+        <div class="day-body">
+          <p>Follow <b>10–15 creators</b> who post restaurant reviews, fast-food orders and healthy eating. Like 10–20 of their videos. Use search to find them:</p>
+          <div class="searches"><span>healthy fast food order</span><span>high protein Chipotle</span><span>what to order at</span><span>low calorie restaurant</span><span>macro friendly eating out</span></div>
+        </div>
+      </li>
+      <li class="day">
+        <div class="day-label">Day 3<small>Engage</small></div>
+        <div class="day-body">
+          <p>Like 20–30 food videos, save 5, and leave <b>5–10 real comments</b> (a full sentence, not just an emoji). Follow 5 more food creators.</p>
+        </div>
+      </li>
+      <li class="day">
+        <div class="day-label">Day 4<small>Check</small></div>
+        <div class="day-body">
+          <p>Keep engaging like day 3. Then check your feed: <b>most of what you see should be food and restaurant content.</b> If it isn't, spend extra time searching and watching food videos today.</p>
+        </div>
+      </li>
+      <li class="day">
+        <div class="day-label">Day 5<small>Prep</small></div>
+        <div class="day-body">
+          <p>One more normal session. Film your first MenuFit video and save it as a <b>draft</b>. Don't post it yet. Send your three handles to the MenuFit team.</p>
+        </div>
+      </li>
+      <li class="day go">
+        <div class="day-label">Day 6<small>Post</small></div>
+        <div class="day-body">
+          <p><b>Post your first video.</b> Keep scrolling and engaging a little every day after this, so your accounts stay active between posts.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="rules">
+    <p class="eyebrow">Rules</p>
+    <h2>Do this, avoid that</h2>
+    <div class="rules">
+      <div class="rule-col">
+        <h3><span class="pill do">Do</span></h3>
+        <ul>
+          <li>Use your own phone and your own SIM or home Wi-Fi.</li>
+          <li>Keep each app logged into only the new account during warmup.</li>
+          <li>Watch videos all the way through.</li>
+          <li>Act like a real fan of food content, at a normal pace.</li>
+          <li>Ask the team if anything about your account looks off.</li>
+        </ul>
+      </div>
+      <div class="rule-col">
+        <h3><span class="pill dont">Don't</span></h3>
+        <ul>
+          <li>Post anything before day 6.</li>
+          <li>Mention MenuFit or add a link in your bio until the team says so.</li>
+          <li>Use a VPN, emulator, or automation tool.</li>
+          <li>Follow or unfollow in big bursts (more than ~20 at once).</li>
+          <li>Buy followers or likes, or repost other people's videos.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="checklist">
+    <p class="eyebrow">Before you post</p>
+    <h2>Ready-to-post checklist</h2>
+    <p>Tick these off on day 5. Your ticks are saved on this device only.</p>
+    <ul class="checklist">
+      <li><label><input type="checkbox" id="c1"><span>TikTok, Instagram and Facebook accounts are created and new</span></label></li>
+      <li><label><input type="checkbox" id="c2"><span>Same food-related username on all three</span></label></li>
+      <li><label><input type="checkbox" id="c3"><span>Face photo, first name and short food bio added (no link)</span></label></li>
+      <li><label><input type="checkbox" id="c4"><span>Completed all 5 warmup days on every app</span></label></li>
+      <li><label><input type="checkbox" id="c5"><span>Following at least 15 food or restaurant creators</span></label></li>
+      <li><label><input type="checkbox" id="c6"><span>My feed is mostly food and restaurant videos</span></label></li>
+      <li><label><input type="checkbox" id="c7"><span>First MenuFit video is filmed and saved as a draft</span></label></li>
+      <li><label><input type="checkbox" id="c8"><span>Sent my three handles to the MenuFit team</span></label></li>
+    </ul>
+    <div class="progress-row">
+      <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+      <span id="progress-text">0 of 8 done</span>
+      <button type="button" class="reset" id="reset">Clear ticks</button>
+    </div>
+    <p id="ready" hidden>You're ready. Post your first video on day 6.</p>
+  </section>
+
+  <div class="callout">
+    <h3>Questions?</h3>
+    <p>Message the MenuFit team in your creator chat before you post if anything is unclear, or if an app asks you to verify your account.</p>
+  </div>
+
+  <footer>MenuFit creator program · Account warmup requirements</footer>
+</main>
+
+<script>
+(function () {
+  var KEY = "menufit-warmup-checklist";
+  var boxes = Array.prototype.slice.call(document.querySelectorAll(".checklist input"));
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { saved = {}; }
+
+  function update() {
+    var done = boxes.filter(function (b) { return b.checked; }).length;
+    document.getElementById("bar").style.width = (done / boxes.length * 100) + "%";
+    document.getElementById("progress-text").textContent = done + " of " + boxes.length + " done";
+    document.getElementById("ready").hidden = done !== boxes.length;
+    var state = {};
+    boxes.forEach(function (b) { state[b.id] = b.checked; });
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  boxes.forEach(function (b) {
+    b.checked = !!saved[b.id];
+    b.addEventListener("change", update);
+  });
+  document.getElementById("reset").addEventListener("click", function () {
+    boxes.forEach(function (b) { b.checked = false; });
+    update();
+  });
+  update();
+})();
+</script>
+</body>
+</html>
