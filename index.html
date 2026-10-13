@@ -8,31 +8,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
 <style>
-/* Layout: one readable column, a facts strip, a day-by-day timeline, two-column do/don't, and a tickable final checklist. */
+/* Layout: one readable column, a facts strip, a step-by-step timeline, and a tickable final checklist. One blue look with white accents in every theme. */
 :root {
-  --bg: #f6f8f5;
-  --surface: #ffffff;
-  --fg: #18221b;
-  --muted: #536257;
-  --line: #d9e2da;
-  --accent: #1f7a45;
-  --accent-soft: #e2f1e6;
-  --warn: #b23a2a;
-  --warn-soft: #fbe9e5;
+  --bg: #1747c9;
+  --surface: #2155d6;
+  --fg: #ffffff;
+  --muted: #d3defc;
+  --line: #4874e3;
+  --accent: #ffffff;
+  --accent-soft: #3466e0;
+  --warn: #1747c9;
+  --warn-soft: #ffffff;
   --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #111713; --surface: #18201a; --fg: #e6ede7; --muted: #9db0a2; --line: #2b372e;
-    --accent: #5cc98a; --accent-soft: #1d3326; --warn: #f08a78; --warn-soft: #3a211d;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #111713; --surface: #18201a; --fg: #e6ede7; --muted: #9db0a2; --line: #2b372e;
-  --accent: #5cc98a; --accent-soft: #1d3326; --warn: #f08a78; --warn-soft: #3a211d;
   color-scheme: dark;
 }
 
@@ -124,6 +112,7 @@ header { display: flex; flex-direction: column; gap: 0.9rem; }
 }
 .checklist label:hover { background: var(--accent-soft); }
 .checklist input { width: 1.2rem; height: 1.2rem; margin-top: 0.2rem; accent-color: var(--accent); }
+.handles code { border: 1px solid var(--line); }
 .checklist input:checked + span { color: var(--muted); text-decoration: line-through; }
 .progress-row { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
 .bar { flex: 1 1 12rem; height: 8px; background: var(--line); border-radius: 999px; overflow: hidden; }
@@ -157,7 +146,7 @@ footer { font-size: 0.9rem; color: var(--muted); }
 @media (max-width: 480px) { .day { grid-template-columns: 1fr; gap: 0.4rem; } }
 .day.key { border-left: 0; }
 .day-body h3 { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-.note { background: var(--warn-soft); color: var(--fg); padding: 0.6rem 0.8rem; border-radius: 8px; font-weight: 700; }
+.note { background: var(--warn-soft); color: var(--warn); padding: 0.6rem 0.8rem; border-radius: 8px; font-weight: 700; }
 </style>
 </head>
 <body>
