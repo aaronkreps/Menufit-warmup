@@ -142,6 +142,22 @@ button.reset:hover { color: var(--fg); border-color: var(--muted); }
 }
 footer { font-size: 0.9rem; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+
+/* Views impact */
+.impact { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.impact-num { flex: 1 1 10rem; display: flex; flex-direction: column; gap: 0.1rem; }
+.impact-num b { font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; line-height: 1; color: var(--muted); font-variant-numeric: tabular-nums; }
+.impact-num.good b { color: var(--accent); }
+.impact-num span { font-size: 0.95rem; color: var(--muted); }
+.impact-arrow { font-size: 1.8rem; color: var(--muted); }
+@media (max-width: 480px) { .impact-arrow { display: none; } }
+
+.day-label { line-height: 1.25; }
+.day { grid-template-columns: 6.5rem 1fr; }
+@media (max-width: 480px) { .day { grid-template-columns: 1fr; gap: 0.4rem; } }
+.day.key { border-left: 0; }
+.day-body h3 { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.note { background: var(--warn-soft); color: var(--fg); padding: 0.6rem 0.8rem; border-radius: 8px; font-weight: 700; }
 </style>
 </head>
 <body>
@@ -150,127 +166,82 @@ footer { font-size: 0.9rem; color: var(--muted); }
   <header>
     <p class="eyebrow">MenuFit creator onboarding</p>
     <h1>Warm up your accounts before you post</h1>
-    <p class="lede">New accounts that post right away get very little reach. Spend five days using your new accounts like a normal person who loves food, so TikTok and Instagram learn what your page is about. Then your first MenuFit video lands in front of the right people.</p>
+    <p class="lede">Before your first post, spend a few days using your new account the way a fan of healthy eating out and fitness would. This trains the algorithm to show your videos to the right people.</p>
   </header>
 
-  <div class="facts" role="list">
-    <div class="fact" role="listitem"><b>3</b><span>new accounts: TikTok, Instagram, Facebook</span></div>
-    <div class="fact" role="listitem"><b>5 days</b><span>of warmup before your first post</span></div>
-    <div class="fact" role="listitem"><b>20–30 min</b><span>per day, per app</span></div>
-    <div class="fact" role="listitem"><b>Day 6</b><span>your first MenuFit video goes up</span></div>
+  <div class="impact">
+    <div class="impact-num"><b>300</b><span>views on a first post from a cold account</span></div>
+    <div class="impact-arrow" aria-hidden="true">→</div>
+    <div class="impact-num good"><b>1,000+</b><span>views on a first post from a warmed-up account</span></div>
   </div>
 
-  <section id="setup">
-    <p class="eyebrow">Day 1</p>
-    <h2>Create your accounts</h2>
-    <ul class="setup">
-      <li><div><b>Make brand-new accounts</b> on TikTok, Instagram and Facebook. Don't reuse an old or personal page.</div></li>
-      <li><div><b>Pick one username and use it on all three.</b> Combine your name with one of these:
-        <div class="handles"><code>leanwith_</code><code>hacksw</code><code>fitw</code><code>grubw</code><code>_xfit</code><code>_eats</code><code>_fuel</code><code>_gainz</code><code>_getslean</code><code>what_eats</code><code>healthw_</code></div></div></li>
-      <li><div><b>Use a clear photo of your face</b> as the profile picture, and your first name as the display name.</div></li>
-      <li><div><b>Write a short food bio</b>, for example "Healthy orders at the places you already eat 🍔🥗". No links yet.</div></li>
-      <li><div><b>Sign up on your own phone</b> with the app, not a computer. Use your normal Wi-Fi or mobile data, and turn any VPN off.</div></li>
-    </ul>
-  </section>
+  <div class="facts" role="list">
+    <div class="fact" role="listitem"><b>20+</b><span>niche creators followed</span></div>
+    <div class="fact" role="listitem"><b>20+</b><span>niche videos reposted</span></div>
+    <div class="fact" role="listitem"><b>Days 2–3</b><span>warming up the account</span></div>
+    <div class="fact" role="listitem"><b>1</b><span>screen recording sent before your first upload</span></div>
+  </div>
 
   <section id="schedule">
-    <p class="eyebrow">Day by day</p>
-    <h2>The 5-day warmup</h2>
-    <p>Do each day on all three apps. Watch videos to the end, and only like or comment on things you actually enjoy.</p>
+    <p class="eyebrow">Step by step</p>
+    <h2>The warmup</h2>
     <ol class="timeline">
       <li class="day">
-        <div class="day-label">Day 1<small>Scroll</small></div>
+        <div class="day-label">Day 1<small>Create</small></div>
         <div class="day-body">
-          <p>Finish your profile. Scroll the For You / Explore feed for 20–30 minutes. Stop on food videos and skip everything else quickly.</p>
+          <h3>Create your accounts</h3>
+          <p>Pick a username that combines your name with one of these:</p>
+          <div class="handles"><code>leanwith_</code><code>hacksw</code><code>fitw</code><code>grubw</code><code>_xfit</code><code>_eats</code><code>_fuel</code><code>_gainz</code><code>_getslean</code><code>what_eats</code><code>healthw_</code></div>
         </div>
       </li>
-      <li class="day">
-        <div class="day-label">Day 2<small>Follow</small></div>
+      <li class="day key">
+        <div class="day-label">Days 2–3<small>Warm up</small></div>
         <div class="day-body">
-          <p>Follow <b>10–15 creators</b> who post restaurant reviews, fast-food orders and healthy eating. Like 10–20 of their videos. Use search to find them:</p>
-          <div class="searches"><span>healthy fast food order</span><span>high protein Chipotle</span><span>what to order at</span><span>low calorie restaurant</span><span>macro friendly eating out</span></div>
-        </div>
-      </li>
-      <li class="day">
-        <div class="day-label">Day 3<small>Engage</small></div>
-        <div class="day-body">
-          <p>Like 20–30 food videos, save 5, and leave <b>5–10 real comments</b> (a full sentence, not just an emoji). Follow 5 more food creators.</p>
-        </div>
-      </li>
-      <li class="day">
-        <div class="day-label">Day 4<small>Check</small></div>
-        <div class="day-body">
-          <p>Keep engaging like day 3. Then check your feed: <b>most of what you see should be food and restaurant content.</b> If it isn't, spend extra time searching and watching food videos today.</p>
-        </div>
-      </li>
-      <li class="day">
-        <div class="day-label">Day 5<small>Prep</small></div>
-        <div class="day-body">
-          <p>One more normal session. Film your first MenuFit video and save it as a <b>draft</b>. Don't post it yet. Send your three handles to the MenuFit team.</p>
+          <h3>Train the algorithm <span class="pill dont">Important</span></h3>
+          <p>Stay inside the <b>healthy eating out and fitness</b> niche the whole time.</p>
+          <ul>
+            <li><b>Like</b> videos in the niche.</li>
+            <li><b>Repost 20+ videos</b> from the niche.</li>
+            <li><b>Follow 20+ creators</b> in the niche.</li>
+            <li><b>Comment</b> on videos every so often.</li>
+          </ul>
+          <p class="note">This step is the difference between about 300 views and 1,000+ on your first post. Don't skip it.</p>
         </div>
       </li>
       <li class="day go">
-        <div class="day-label">Day 6<small>Post</small></div>
+        <div class="day-label">Before you upload<small>Prove it</small></div>
         <div class="day-body">
-          <p><b>Post your first video.</b> Keep scrolling and engaging a little every day after this, so your accounts stay active between posts.</p>
+          <h3>Send a quick screen recording</h3>
+          <p>Before your first upload, record your screen and send it to the MenuFit team. It should show:</p>
+          <ul>
+            <li>A few scrolls through your For You page.</li>
+            <li>Your profile, showing you follow <b>20+ creators</b>.</li>
+            <li>Your reposts, showing <b>20+ reposted videos</b>.</li>
+          </ul>
         </div>
       </li>
     </ol>
   </section>
 
-  <section id="rules">
-    <p class="eyebrow">Rules</p>
-    <h2>Do this, avoid that</h2>
-    <div class="rules">
-      <div class="rule-col">
-        <h3><span class="pill do">Do</span></h3>
-        <ul>
-          <li>Use your own phone and your own SIM or home Wi-Fi.</li>
-          <li>Keep each app logged into only the new account during warmup.</li>
-          <li>Watch videos all the way through.</li>
-          <li>Act like a real fan of food content, at a normal pace.</li>
-          <li>Ask the team if anything about your account looks off.</li>
-        </ul>
-      </div>
-      <div class="rule-col">
-        <h3><span class="pill dont">Don't</span></h3>
-        <ul>
-          <li>Post anything before day 6.</li>
-          <li>Mention MenuFit or add a link in your bio until the team says so.</li>
-          <li>Use a VPN, emulator, or automation tool.</li>
-          <li>Follow or unfollow in big bursts (more than ~20 at once).</li>
-          <li>Buy followers or likes, or repost other people's videos.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
   <section id="checklist">
     <p class="eyebrow">Before you post</p>
     <h2>Ready-to-post checklist</h2>
-    <p>Tick these off on day 5. Your ticks are saved on this device only.</p>
+    <p>Your ticks are saved on this device only.</p>
     <ul class="checklist">
-      <li><label><input type="checkbox" id="c1"><span>TikTok, Instagram and Facebook accounts are created and new</span></label></li>
-      <li><label><input type="checkbox" id="c2"><span>Same food-related username on all three</span></label></li>
-      <li><label><input type="checkbox" id="c3"><span>Face photo, first name and short food bio added (no link)</span></label></li>
-      <li><label><input type="checkbox" id="c4"><span>Completed all 5 warmup days on every app</span></label></li>
-      <li><label><input type="checkbox" id="c5"><span>Following at least 15 food or restaurant creators</span></label></li>
-      <li><label><input type="checkbox" id="c6"><span>My feed is mostly food and restaurant videos</span></label></li>
-      <li><label><input type="checkbox" id="c7"><span>First MenuFit video is filmed and saved as a draft</span></label></li>
-      <li><label><input type="checkbox" id="c8"><span>Sent my three handles to the MenuFit team</span></label></li>
+      <li><label><input type="checkbox" id="c1"><span>Account created with a username from the list</span></label></li>
+      <li><label><input type="checkbox" id="c2"><span>Liked videos in the healthy eating out and fitness niche</span></label></li>
+      <li><label><input type="checkbox" id="c3"><span>Reposted 20+ niche videos</span></label></li>
+      <li><label><input type="checkbox" id="c4"><span>Following 20+ niche creators</span></label></li>
+      <li><label><input type="checkbox" id="c5"><span>Left a few comments on niche videos</span></label></li>
+      <li><label><input type="checkbox" id="c6"><span>Sent a screen recording of my For You page, follows and reposts</span></label></li>
     </ul>
     <div class="progress-row">
       <div class="bar" aria-hidden="true"><i id="bar"></i></div>
-      <span id="progress-text">0 of 8 done</span>
+      <span id="progress-text">0 of 6 done</span>
       <button type="button" class="reset" id="reset">Clear ticks</button>
     </div>
-    <p id="ready" hidden>You're ready. Post your first video on day 6.</p>
+    <p id="ready" hidden>You're ready to upload your first video.</p>
   </section>
-
-  <div class="callout">
-    <h3>Questions?</h3>
-    <p>Message the MenuFit team in your creator chat before you post if anything is unclear, or if an app asks you to verify your account.</p>
-  </div>
 
   <footer>MenuFit creator program · Account warmup requirements</footer>
 </main>
