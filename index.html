@@ -150,6 +150,13 @@ footer { font-size: 0.9rem; color: var(--muted); }
 .steps li::before { content: counter(step); display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--warn-soft); color: var(--warn); font-family: var(--font-display); font-weight: 800; }
 .steps li > div { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
 
+/* Creator site callout */
+.hub { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1.2rem; }
+.hub-text { display: flex; flex-direction: column; gap: 0.4rem; min-width: 0; flex: 1 1 18rem; }
+.hub-text .handles { margin-top: 0.2rem; }
+.hub-link { display: inline-block; font-weight: 700; text-decoration: none; background: var(--warn-soft); color: var(--warn); padding: 0.55rem 1rem; border-radius: 999px; white-space: nowrap; }
+.hub-link.soon { background: transparent; color: var(--muted); border: 1px dashed var(--line); font-weight: 400; }
+
 /* Views impact */
 .impact { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .impact-num { flex: 1 1 10rem; display: flex; flex-direction: column; gap: 0.1rem; }
@@ -178,6 +185,16 @@ footer { font-size: 0.9rem; color: var(--muted); }
     <h1>Warm up your accounts before you post</h1>
     <p class="lede">Before your first post, spend a few days using your new accounts the way a fan of healthy eating out and fitness would. This trains the algorithm to show your videos to the right people.</p>
   </header>
+
+  <div class="hub">
+    <div class="hub-text">
+      <h3>The MenuFit creator site</h3>
+      <p>Your one-stop shop for everything you need to make videos.</p>
+      <div class="handles"><code>Formats</code><code>Visuals</code><code>Scripts</code><code>CTAs</code></div>
+    </div>
+    <!-- Replace this span with <a class="hub-link" href="CREATOR-SITE-URL">Open the creator site</a> once the site is live. -->
+    <span class="hub-link soon">Link coming soon</span>
+  </div>
 
   <div class="impact">
     <div class="impact-num"><b>300</b><span>views on a first post from a cold account</span></div>
