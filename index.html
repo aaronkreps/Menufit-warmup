@@ -160,6 +160,26 @@ footer { font-size: 0.9rem; color: var(--muted); }
 .hub-link { display: inline-block; font-weight: 700; text-decoration: none; background: var(--warn); color: var(--warn-soft); padding: 0.65rem 1.2rem; border-radius: 999px; white-space: nowrap; }
 .hub-link.soon { background: transparent; color: var(--warn); border: 2px dashed var(--warn); }
 
+/* Section nav: fixed sidebar on wide screens, sticky chip bar on phones */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+#creator-site, section { scroll-margin-top: 4.5rem; }
+.toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg-edge); border-bottom: 1px solid var(--line); }
+.toc ol { list-style: none; margin: 0; padding-block: 0.6rem; padding-inline: 1.25rem; display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none; }
+.toc ol::-webkit-scrollbar { display: none; }
+.toc .toc-title { display: none; }
+.toc a { display: block; white-space: nowrap; text-decoration: none; color: var(--muted); font-size: 0.9rem; padding: 0.35rem 0.7rem; border-radius: 999px; border: 1px solid var(--line); }
+.toc a:hover { color: var(--fg); border-color: var(--muted); }
+.toc a.active { background: var(--warn-soft); color: var(--warn); border-color: var(--warn-soft); font-weight: 700; }
+@media (min-width: 1100px) {
+  #creator-site, section { scroll-margin-top: 1.5rem; }
+  .toc { position: fixed; top: calc(env(safe-area-inset-top, 0px) + 2.5rem); left: max(1.5rem, calc(50% - 23rem - 13.5rem)); width: 11rem; background: none; border: 0; }
+  .toc .toc-title { display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0 0 0.6rem 0.8rem; }
+  .toc ol { flex-direction: column; padding: 0; gap: 0.25rem; overflow: visible; }
+  .toc a { border: 0; border-radius: 8px; font-size: 1rem; padding: 0.45rem 0.8rem; }
+  .toc a:hover { background: var(--accent-soft); }
+}
+
 /* Views impact */
 .impact { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .impact-num { flex: 1 1 10rem; display: flex; flex-direction: column; gap: 0.1rem; }
@@ -178,6 +198,15 @@ footer { font-size: 0.9rem; color: var(--muted); }
 </style>
 </head>
 <body>
+<nav class="toc" aria-label="Page sections">
+  <p class="toc-title">On this page</p>
+  <ol>
+    <li><a href="#creator-site">Creator site</a></li>
+    <li><a href="#schedule">Warmup</a></li>
+    <li><a href="#checklist">Checklist</a></li>
+    <li><a href="#post">Posting</a></li>
+  </ol>
+</nav>
 <main class="wrap">
 
   <header>
@@ -316,6 +345,26 @@ footer { font-size: 0.9rem; color: var(--muted); }
     update();
   });
   update();
+})();
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll(".toc a"));
+  if (!("IntersectionObserver" in window)) return;
+  var targets = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+  function setActive(id) {
+    links.forEach(function (a) {
+      var on = a.getAttribute("href") === "#" + id;
+      a.classList.toggle("active", on);
+      if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+    });
+  }
+  var visible = {};
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { visible[e.target.id] = e.isIntersecting; });
+    for (var i = 0; i < targets.length; i++) {
+      if (visible[targets[i].id]) { setActive(targets[i].id); return; }
+    }
+  }, { rootMargin: "-20% 0px -60% 0px" });
+  targets.forEach(function (t) { if (t) io.observe(t); });
 })();
 </script>
 </body>
