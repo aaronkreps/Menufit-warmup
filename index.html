@@ -164,10 +164,10 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 #creator-site, section { scroll-margin-top: 4.5rem; }
 .toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg-edge); border-bottom: 1px solid var(--line); }
-.toc ol { list-style: none; margin: 0; padding-block: 0.6rem; padding-inline: 1.25rem; display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none; }
+.toc ol { list-style: none; margin: 0; padding-block: 0.6rem; padding-inline: 1rem; display: flex; gap: 0.35rem; overflow-x: auto; scrollbar-width: none; }
 .toc ol::-webkit-scrollbar { display: none; }
 .toc .toc-title { display: none; }
-.toc a { display: block; white-space: nowrap; text-decoration: none; color: var(--muted); font-size: 0.9rem; padding: 0.35rem 0.7rem; border-radius: 999px; border: 1px solid var(--line); }
+.toc a { display: block; white-space: nowrap; text-decoration: none; color: var(--muted); font-size: 0.85rem; padding: 0.35rem 0.6rem; border-radius: 999px; border: 1px solid var(--line); }
 .toc a:hover { color: var(--fg); border-color: var(--muted); }
 .toc a.active { background: var(--warn-soft); color: var(--warn); border-color: var(--warn-soft); font-weight: 700; }
 @media (min-width: 1100px) {
@@ -189,6 +189,19 @@ html { scroll-behavior: smooth; }
 .expect-list { list-style: none; padding: 0; gap: 0.75rem; }
 .expect-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.1rem; }
 .expect-list b { display: block; margin-bottom: 0.25rem; }
+
+/* Pay */
+.retainer { background: var(--warn-soft); color: var(--warn); border-radius: 16px; padding: 1.4rem; display: flex; flex-direction: column; gap: 0.3rem; box-shadow: 0 10px 30px rgba(4, 20, 70, 0.35); }
+.retainer-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.retainer-amt { font-family: var(--font-display); font-size: clamp(2.4rem, 9vw, 3.2rem); font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.retainer-amt small { font-family: var(--font-body); font-size: 1.1rem; font-weight: 700; margin-left: 0.2rem; }
+.bonus { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.5rem; }
+.bonus h3 { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; font-size: 1.3rem; font-weight: 800; }
+.bonus-note { font-family: var(--font-body); font-size: 0.95rem; font-weight: 400; color: var(--muted); }
+.tiers { list-style: none; padding: 0; gap: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.tiers li { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.9rem 1.1rem; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.tiers li:first-child { border-top: 0; }
+.tiers b { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; }
 
 /* Views impact */
 .impact { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
@@ -215,6 +228,7 @@ html { scroll-behavior: smooth; }
     <li><a href="#schedule">Warmup</a></li>
     <li><a href="#checklist">Checklist</a></li>
     <li><a href="#post">Posting</a></li>
+    <li><a href="#pay">Pay</a></li>
   </ol>
 </nav>
 <main class="wrap">
@@ -330,6 +344,24 @@ html { scroll-behavior: smooth; }
         <li><b>Your first post in each format needs approval.</b> Send it in your private creator Discord channel or on SideShift for approval before posting.</li>
         <li><b>Mention MenuFit in every video.</b> Talking about it, on-screen text, or driving people to the comments all count. For your first few days of posting you don't need a hard MenuFit CTA. Focus on getting your account warmed up and building your content style, and the mention can be light.</li>
         <li><b>2 posts a day, about 25–30 minutes a day, cross-posted.</b> We know you have a life. If you can't post, just let us know 😌</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="pay">
+    <p class="eyebrow">Compensation</p>
+    <h2>The pay</h2>
+    <div class="retainer">
+      <span class="retainer-label">Base retainer</span>
+      <b class="retainer-amt">$1,000<small>/month</small></b>
+      <p>Guaranteed for <b>60 posts per month</b>, cross-posted.</p>
+    </div>
+    <div class="bonus">
+      <h3>Bonuses <span class="bonus-note">per video, no cap</span></h3>
+      <ul class="tiers">
+        <li><span>50,000+ views</span><b>$80</b></li>
+        <li><span>100,000+ views</span><b>$200</b></li>
+        <li><span>500,000+ views</span><b>$800</b></li>
       </ul>
     </div>
   </section>
