@@ -144,6 +144,12 @@ footer { font-size: 0.9rem; color: var(--muted); }
 .brand-text { display: flex; flex-direction: column; gap: 0.1rem; }
 .brand-name { font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; line-height: 1; }
 
+.hub-video { flex: 1 1 100%; display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
+.hub-video-label { font-weight: 700; }
+.video-frame { position: relative; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: var(--warn); }
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.hub-video-alt { color: var(--warn); font-size: 0.9rem; }
+
 /* Posting steps */
 .steps { list-style: none; padding: 0; margin: 0; counter-reset: step; display: flex; flex-direction: column; gap: 0.75rem; }
 .steps li { counter-increment: step; display: grid; grid-template-columns: 2.25rem 1fr; gap: 0.85rem; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1rem; }
@@ -250,6 +256,13 @@ html { scroll-behavior: smooth; }
       <div class="handles"><code>Formats</code><code>Visuals</code><code>Scripts</code><code>CTAs</code><code>Viral reference videos</code></div>
     </div>
     <a class="hub-link" href="https://menufit-creators.menufit-influencer-dashboard.workers.dev/" target="_blank" rel="noopener">Open the creator site →</a>
+    <div class="hub-video">
+      <p class="hub-video-label">Watch first: how to use the creator site</p>
+      <div class="video-frame">
+        <iframe src="https://www.loom.com/embed/849d9fb82b6a4b4c9a15e1d049041917" title="How to use the MenuFit creator site" loading="lazy" allow="fullscreen" allowfullscreen></iframe>
+      </div>
+      <a class="hub-video-alt" href="https://www.loom.com/share/849d9fb82b6a4b4c9a15e1d049041917" target="_blank" rel="noopener">Video not loading? Watch it on Loom</a>
+    </div>
   </div>
 
   <div class="impact">
