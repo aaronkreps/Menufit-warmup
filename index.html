@@ -211,6 +211,14 @@ html { scroll-behavior: smooth; }
 
 .fun { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; }
 
+/* Script split: free part vs fixed CTA */
+.script-split { display: grid; grid-template-columns: 2fr 1fr; gap: 0.4rem; margin-block: 0.8rem; }
+.script-split div { display: flex; flex-direction: column; gap: 0.1rem; padding: 0.7rem 0.85rem; border-radius: 10px; border: 1px dashed var(--muted); min-width: 0; }
+.script-split div.fixed { background: var(--warn-soft); color: var(--warn); border: 1px solid var(--warn-soft); }
+.script-split span { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.85; }
+.script-split b { margin: 0; font-family: var(--font-display); font-size: 1.05rem; }
+@media (max-width: 400px) { .script-split { grid-template-columns: 1fr; } }
+
 /* Views impact */
 .impact { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .impact-num { flex: 1 1 10rem; display: flex; flex-direction: column; gap: 0.1rem; }
@@ -358,7 +366,12 @@ html { scroll-behavior: smooth; }
       <h3>Expectations</h3>
       <ul class="expect-list">
         <li><b>Your first post in each format needs approval.</b> Send it in your private creator Discord channel or on SideShift for approval before posting.</li>
-        <li><b>Use the CTA the site gives you.</b> For your first few days of posting you don't need a hard MenuFit CTA. Focus on getting your account warmed up and building your content style, and the mention can be light. After the first few days, use the exact CTA from the script on the creator site.</li>
+        <li><b>Say the CTA word for word. The rest is yours.</b> Every script on the creator site ends with a CTA. That part needs to be said exactly as written. Everything before it is a starting point, so put it in your own words and make it sound like you.
+          <div class="script-split">
+            <div><span>Rest of the script</span><b>Creative freedom</b></div>
+            <div class="fixed"><span>CTA</span><b>Word for word</b></div>
+          </div>
+          For your first few days of posting you don't need a hard MenuFit CTA. Focus on getting your account warmed up and building your content style, and the mention can be light. After the first few days, use the exact CTA from the script.</li>
         <li><b>2 posts a day, cross-posted.</b> We know you have a life. If you can't post, just let us know 😌</li>
       </ul>
     </div>
