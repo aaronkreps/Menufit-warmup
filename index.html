@@ -219,6 +219,17 @@ html { scroll-behavior: smooth; }
 .script-split b { margin: 0; font-family: var(--font-display); font-size: 1.05rem; }
 @media (max-width: 400px) { .script-split { grid-template-columns: 1fr; } }
 
+/* Required hashtag rule */
+.tag-rule { background: var(--warn-soft); color: var(--warn); border-radius: 16px; padding: 1.4rem; display: flex; flex-direction: column; gap: 0.7rem; margin-top: 1rem; box-shadow: 0 10px 30px rgba(4, 20, 70, 0.35); }
+.tag-rule .tag { align-self: flex-start; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; background: var(--warn); color: var(--warn-soft); padding: 0.2rem 0.65rem; border-radius: 999px; }
+.tag-rule h3 { font-size: 1.35rem; font-weight: 800; }
+.caption-example { border: 2px dashed var(--warn); border-radius: 12px; padding: 0.8rem 1rem; display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
+.caption-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.caption-example p { font-size: 1.05rem; overflow-wrap: anywhere; }
+.caption-example .muted-part { opacity: 0.7; font-style: italic; }
+.caption-example mark { background: var(--warn); color: var(--warn-soft); font-weight: 700; padding: 0.05rem 0.35rem; border-radius: 6px; }
+.copy-tags { align-self: flex-start; font: inherit; font-weight: 700; background: var(--warn); color: var(--warn-soft); border: 0; border-radius: 999px; padding: 0.6rem 1.1rem; cursor: pointer; }
+
 /* Views impact */
 .impact { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .impact-num { flex: 1 1 10rem; display: flex; flex-direction: column; gap: 0.1rem; }
@@ -362,6 +373,17 @@ html { scroll-behavior: smooth; }
       <li><div><h3>Post</h3><p>You only need a review once per format. After that, you're good to post that format whenever you're ready.</p></div></li>
     </ol>
 
+    <div class="tag-rule" id="hashtag">
+      <span class="tag">Required from day 3</span>
+      <h3>Every post needs #menufitpartner and @menufit.app</h3>
+      <p>After your first <b>2 days of posting</b>, you <b>have to</b> include <b>#menufitpartner</b> and <b>@menufit.app</b> in the caption of <b>every post on every platform</b>: TikTok, Instagram, YouTube and Facebook. No exceptions.</p>
+      <div class="caption-example">
+        <span class="caption-label">Example caption</span>
+        <p><span class="muted-part">caption --</span> #_____ #_____ #__________ <mark>#menufitpartner</mark> <mark>@menufit.app</mark></p>
+      </div>
+      <button type="button" class="copy-tags" id="copy-tags">Copy hashtag &amp; tag</button>
+    </div>
+
     <div class="expect">
       <h3>Expectations</h3>
       <ul class="expect-list">
@@ -371,7 +393,7 @@ html { scroll-behavior: smooth; }
             <div><span>Rest of the script</span><b>Creative freedom</b></div>
             <div class="fixed"><span>CTA</span><b>Word for word</b></div>
           </div>
-          For your first few days of posting you don't need a hard MenuFit CTA. Focus on getting your account warmed up and building your content style, and the mention can be light. After the first few days, use the exact CTA from the script.</li>
+          For your <b>first 2 days of posting</b> you don't need the CTA or the hashtag. Focus on getting your account warmed up and building your content style. <b>From day 3 on</b>, use the exact CTA from the script in every video.</li>
         <li><b>2 or 3 posts a day, cross-posted, depending on your campaign.</b> We know you have a life. If you can't post, just let us know 😌</li>
       </ul>
     </div>
@@ -445,6 +467,18 @@ html { scroll-behavior: smooth; }
     }
   }, { rootMargin: "-20% 0px -60% 0px" });
   targets.forEach(function (t) { if (t) io.observe(t); });
+})();
+(function () {
+  var btn = document.getElementById("copy-tags");
+  if (!btn) return;
+  var text = "#menufitpartner @menufit.app";
+  var label = btn.textContent;
+  btn.addEventListener("click", function () {
+    function done(msg) { btn.textContent = msg; setTimeout(function () { btn.textContent = label; }, 1800); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done("Copied!"); }, function () { done(text); });
+    } else { done(text); }
+  });
 })();
 </script>
 </body>
