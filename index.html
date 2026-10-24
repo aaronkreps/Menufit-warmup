@@ -230,6 +230,9 @@ html { scroll-behavior: smooth; }
 .caption-example mark { background: var(--warn); color: var(--warn-soft); font-weight: 700; padding: 0.05rem 0.35rem; border-radius: 6px; }
 .copy-tags { align-self: flex-start; font: inherit; font-weight: 700; background: var(--warn); color: var(--warn-soft); border: 0; border-radius: 999px; padding: 0.6rem 1.1rem; cursor: pointer; }
 
+.tiers li span small { display: block; font-size: 0.78rem; color: var(--muted); }
+.bonus .fb-head { margin-top: 0.6rem; }
+
 /* Views impact */
 .impact { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .impact-num { flex: 1 1 10rem; display: flex; flex-direction: column; gap: 0.1rem; }
@@ -368,9 +371,9 @@ html { scroll-behavior: smooth; }
     <h2>Time to post</h2>
     <p>Your accounts are warmed up. Here's how to start posting.</p>
     <ol class="steps">
-      <li><div><h3>Find the 4 formats</h3><p>The <a href="#creator-site">MenuFit creator site</a> (linked at the top of this page) has 4 video formats to choose from.</p></div></li>
-      <li><div><h3>Send your first one for review</h3><p>The first time you make each format, send the video in your <b>private creator Discord channel</b> or on <b>SideShift</b> for approval before posting it.</p></div></li>
-      <li><div><h3>Post</h3><p>You only need a review once per format. After that, you're good to post that format whenever you're ready.</p></div></li>
+      <li><div><h3>Find the formats</h3><p>The <a href="#creator-site">MenuFit creator site</a> (linked at the top of this page) has the video formats to choose from.</p></div></li>
+      <li><div><h3>Send all posts from your first 2 days for review</h3><p>For your first 2 days of posting, send every video in your <b>private creator Discord channel</b> or on <b>SideShift</b> for approval before posting it.</p></div></li>
+      <li><div><h3>Post</h3><p>After your first 2 days, you're good to post without sending videos for review first.</p></div></li>
     </ol>
 
     <div class="tag-rule" id="hashtag">
@@ -387,7 +390,7 @@ html { scroll-behavior: smooth; }
     <div class="expect">
       <h3>Expectations</h3>
       <ul class="expect-list">
-        <li><b>Your first post in each format needs approval.</b> Send it in your private creator Discord channel or on SideShift for approval before posting.</li>
+        <li><b>All posts from your first 2 days need approval.</b> Send them in your private creator Discord channel or on SideShift for approval before posting.</li>
         <li><b>Say the CTA word for word. The rest is yours.</b> Every script on the creator site ends with a CTA. That part needs to be said exactly as written. Everything before it is a starting point, so put it in your own words and make it sound like you.
           <div class="script-split">
             <div><span>Rest of the script</span><b>Creative freedom</b></div>
@@ -410,11 +413,17 @@ html { scroll-behavior: smooth; }
     <div class="bonus">
       <h3>Bonuses <span class="bonus-note">per video, no cap</span></h3>
       <ul class="tiers">
+        <li><span>25,000+ views<small>(besides Facebook)</small></span><b>$25</b></li>
         <li><span>50,000+ views</span><b>$80</b></li>
         <li><span>100,000+ views</span><b>$200</b></li>
         <li><span>500,000+ views</span><b>$800</b></li>
       </ul>
-      <p class="bonus-note">Bonuses don't stack. Each video earns the highest tier it reaches, so a 500,000-view video pays $800.</p>
+      <h3 class="fb-head">Facebook bonuses <span class="bonus-note">per video, no cap</span></h3>
+      <ul class="tiers">
+        <li><span>100,000+ views</span><b>$50</b></li>
+        <li><span>500,000+ views</span><b>$200</b></li>
+      </ul>
+      <p class="bonus-note">Bonuses don't stack. Each video earns the highest tier it reaches, so a 500,000-view video pays $800 (or $200 on Facebook).</p>
     </div>
   </section>
 
