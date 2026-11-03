@@ -67,13 +67,13 @@ header { display: flex; flex-direction: column; gap: 0.9rem; }
 
 /* Facts strip */
 .facts {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
   background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
 }
 .fact { background: var(--surface); padding: 1rem; display: flex; flex-direction: column; gap: 0.15rem; }
 .fact b { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; font-variant-numeric: tabular-nums; }
 .fact span { font-size: 0.9rem; color: var(--muted); line-height: 1.35; }
-@media (max-width: 560px) { .facts { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .facts { grid-template-columns: repeat(2, 1fr); } .fact:last-child { grid-column: span 2; } }
 
 /* Setup list */
 .setup { list-style: none; padding: 0; gap: 0.9rem; }
@@ -307,7 +307,6 @@ html { scroll-behavior: smooth; }
 
   <div class="facts" role="list">
     <div class="fact" role="listitem"><b>20+</b><span>niche creators followed</span></div>
-    <div class="fact" role="listitem"><b>10+</b><span>niche videos reposted</span></div>
     <div class="fact" role="listitem"><b>Days 2–3</b><span>warming up your accounts</span></div>
     <div class="fact" role="listitem"><b>4</b><span>accounts: TikTok, Instagram, YouTube, Facebook</span></div>
   </div>
@@ -343,7 +342,7 @@ html { scroll-behavior: smooth; }
           <p>Stay inside the <b>healthy eating out and fitness</b> niche the whole time.</p>
           <ul>
             <li><b>Like</b> videos in the niche.</li>
-            <li><b>Repost 10+ videos</b> from the niche.</li>
+            <li><b>Occasionally repost</b> videos that are directly in our niche.</li>
             <li><b>Follow 20+ creators</b> in the niche.</li>
             <li><b>Comment</b> on videos every so often.</li>
           </ul>
@@ -358,7 +357,7 @@ html { scroll-behavior: smooth; }
           <ul>
             <li>A few scrolls through your feed (the For You page on TikTok, Reels on Instagram).</li>
             <li>Your profile, showing you follow <b>20+ creators</b>.</li>
-            <li>Your reposts, showing <b>10+ reposted videos</b>.</li>
+            <li>Your reposts, showing videos that are <b>directly in our niche</b>.</li>
           </ul>
         </div>
       </li>
@@ -373,7 +372,7 @@ html { scroll-behavior: smooth; }
       <li><label><input type="checkbox" id="c1"><span>TikTok, Instagram, YouTube and Facebook accounts created with a username from the list</span></label></li>
       <li><label><input type="checkbox" id="c7"><span>Same short food bio added on every app (pick one from <a href="#schedule">Day 1</a>)</span></label></li>
       <li><label><input type="checkbox" id="c2"><span>Liked videos in the healthy eating out and fitness niche</span></label></li>
-      <li><label><input type="checkbox" id="c3"><span>Reposted 10+ niche videos</span></label></li>
+      <li><label><input type="checkbox" id="c3"><span>Occasionally reposted videos directly in our niche</span></label></li>
       <li><label><input type="checkbox" id="c4"><span>Following 20+ niche creators</span></label></li>
       <li><label><input type="checkbox" id="c5"><span>Left a few comments on niche videos</span></label></li>
       <li><label><input type="checkbox" id="c6"><span>Sent TikTok and Instagram screen recordings of my feed, follows and reposts on SideShift or Discord</span></label></li>
