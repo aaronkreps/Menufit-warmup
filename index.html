@@ -150,6 +150,10 @@ footer { font-size: 0.9rem; color: var(--muted); }
 .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .hub-video-alt { color: var(--warn); font-size: 0.9rem; }
 .video-soon { position: absolute; inset: 0; display: grid; place-items: center; color: var(--warn-soft); font-weight: 700; opacity: 0.8; }
+.hub-keys { flex: 1 1 100%; display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
+.key-points { gap: 0.5rem; }
+.key-points li { font-size: 1.02rem; }
+.key-points li.soon { list-style: none; margin-left: -1.2rem; border: 2px dashed var(--warn); border-radius: 10px; padding: 0.7rem 0.9rem; opacity: 0.7; font-style: italic; }
 .hub-link[aria-disabled="true"] { opacity: 0.6; pointer-events: none; }
 
 /* Posting steps */
@@ -301,6 +305,13 @@ html { scroll-behavior: smooth; }
         <p class="video-soon">Video coming soon</p>
       </div>
       <!-- TODO: add the Loom share link here -->
+    </div>
+    <div class="hub-keys">
+      <p class="hub-video-label">Key points when recording your videos</p>
+      <!-- TODO: Aaron's key points go here, one <li> each -->
+      <ul class="key-points">
+        <li class="soon">Key points coming soon</li>
+      </ul>
     </div>
   </div>
 
