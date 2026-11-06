@@ -149,6 +149,8 @@ footer { font-size: 0.9rem; color: var(--muted); }
 .video-frame { position: relative; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: var(--warn); }
 .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .hub-video-alt { color: var(--warn); font-size: 0.9rem; }
+.video-soon { position: absolute; inset: 0; display: grid; place-items: center; color: var(--warn-soft); font-weight: 700; opacity: 0.8; }
+.hub-link[aria-disabled="true"] { opacity: 0.6; pointer-events: none; }
 
 /* Posting steps */
 .steps { list-style: none; padding: 0; margin: 0; counter-reset: step; display: flex; flex-direction: column; gap: 0.75rem; }
@@ -286,16 +288,19 @@ html { scroll-behavior: smooth; }
     <div class="hub-text">
       <span class="tag">Start here</span>
       <h3>The MenuFit creator site</h3>
-      <p>Your one-stop shop for everything you need to make videos, including viral reference videos to model yours on. Bookmark it, you'll use it for every post.</p>
-      <div class="handles"><code>Formats</code><code>Visuals</code><code>Scripts</code><code>CTAs</code><code>Viral reference videos</code></div>
+      <p>Every day the site gives you <b>3 scripts</b>. Those are your 3 videos for the day. Record them, upload the raw footage under <b>Videos</b>, and the site edits them for you and sends them back within a couple of minutes.</p>
+      <p><b>No editing. Just record and post.</b> Bookmark it, you'll use it every day.</p>
+      <div class="handles"><code>3 scripts a day</code><code>Upload raw footage</code><code>Edited for you in minutes</code></div>
     </div>
-    <a class="hub-link" href="https://menufit-creators.menufit-influencer-dashboard.workers.dev/" target="_blank" rel="noopener">Open the creator site →</a>
+    <!-- TODO: add the new creator site link here, then drop aria-disabled and the "coming soon" text -->
+    <a class="hub-link" href="#creator-site" aria-disabled="true">Link coming soon</a>
     <div class="hub-video">
       <p class="hub-video-label">Watch first: how to use the creator site</p>
       <div class="video-frame">
-        <iframe src="https://www.loom.com/embed/849d9fb82b6a4b4c9a15e1d049041917" title="How to use the MenuFit creator site" loading="lazy" allow="fullscreen" allowfullscreen></iframe>
+        <!-- TODO: add the Loom embed here: <iframe src="https://www.loom.com/embed/VIDEO_ID" ...> -->
+        <p class="video-soon">Video coming soon</p>
       </div>
-      <a class="hub-video-alt" href="https://www.loom.com/share/849d9fb82b6a4b4c9a15e1d049041917" target="_blank" rel="noopener">Video not loading? Watch it on Loom</a>
+      <!-- TODO: add the Loom share link here -->
     </div>
   </div>
 
@@ -390,7 +395,8 @@ html { scroll-behavior: smooth; }
     <h2>Time to post</h2>
     <p>Your accounts are warmed up. Here's how to start posting.</p>
     <ol class="steps">
-      <li><div><h3>Find the formats</h3><p>The <a href="#creator-site">MenuFit creator site</a> (linked at the top of this page) has the video formats to choose from.</p></div></li>
+      <li><div><h3>Get your 3 scripts for the day</h3><p>Open the <a href="#creator-site">MenuFit creator site</a> (linked at the top of this page). Your 3 scripts for the day are waiting there.</p></div></li>
+      <li><div><h3>Record and upload the raw footage</h3><p>Film all 3 scripts and upload the raw clips under <b>Videos</b>. No editing needed. Your finished videos come back within a couple of minutes, ready to post.</p></div></li>
       <li><div><h3>Get your first day of posts approved</h3><p>Every video from your <b>first day of posting</b> needs approval. Send them in your <b>private creator Discord channel</b> or on <b>SideShift</b> and wait for the OK before posting.</p></div></li>
       <li><div><h3>From day 3, send your posts for a CTA check</h3><p>Day 3 is when the CTA starts. Post as normal and send your posts in your <b>private creator Discord channel</b> or on <b>SideShift</b> so we can confirm you're using the right CTA. You don't need to wait for approval.</p></div></li>
     </ol>
@@ -426,7 +432,7 @@ html { scroll-behavior: smooth; }
             </div>
           </div>
           For your <b>first 2 days of posting</b> you don't need the CTA or the hashtag. Focus on getting your account warmed up and building your content style. <b>From day 3 on</b> use the exact CTA from the script in every video.</li>
-        <li><b>3 posts a day, cross-posted.</b> We know you have a life. If you can't post, just let us know 😌</li>
+        <li><b>3 posts a day, cross-posted.</b> That's the 3 scripts the creator site gives you each day. We know you have a life. If you can't post, just let us know 😌</li>
       </ul>
     </div>
   </section>
