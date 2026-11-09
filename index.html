@@ -150,6 +150,9 @@ footer { font-size: 0.9rem; color: var(--muted); }
 .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .hub-video-alt { color: var(--warn); font-size: 0.9rem; }
 .video-soon { position: absolute; inset: 0; display: grid; place-items: center; color: var(--warn-soft); font-weight: 700; opacity: 0.8; }
+.goal { background: var(--warn-soft); color: var(--warn); border-radius: 16px; padding: 1.2rem 1.4rem; display: flex; flex-direction: column; gap: 0.3rem; box-shadow: 0 10px 30px rgba(4, 20, 70, 0.35); }
+.goal-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.goal-amt { font-family: var(--font-display); font-size: clamp(1.4rem, 5vw, 1.8rem); font-weight: 800; line-height: 1.15; }
 .hub-keys { flex: 1 1 100%; display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
 .key-points { gap: 0.5rem; }
 .key-points li { font-size: 1.02rem; }
@@ -317,6 +320,12 @@ html { scroll-behavior: smooth; }
     </div>
   </div>
 
+  <div class="goal">
+    <span class="goal-label">The goal</span>
+    <b class="goal-amt">Start posting 4 days after your onboarding meeting</b>
+    <p>Day 1 create your accounts, days 2–3 warm them up, day 4 post.</p>
+  </div>
+
   <div class="impact">
     <div class="impact-num"><b>200</b><span>views on a first post from a cold account</span></div>
     <div class="impact-arrow" aria-hidden="true">→</div>
@@ -457,6 +466,7 @@ html { scroll-behavior: smooth; }
       <span class="retainer-label">Base retainer</span>
       <b class="retainer-amt">$1,000<small>/month</small></b>
       <p>Guaranteed for <b>90 posts per month</b>, cross-posted.</p>
+      <p>Paid in <b>2-week cycles</b>: <b>$500 every 2 weeks</b>.</p>
     </div>
     <div class="bonus">
       <h3>Bonuses <span class="bonus-note">per video, no cap</span></h3>
