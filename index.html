@@ -266,9 +266,76 @@ html { scroll-behavior: smooth; }
 .day.key { border-left: 0; }
 .day-body h3 { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
 .note { background: var(--warn-soft); color: var(--warn); padding: 0.6rem 0.8rem; border-radius: 8px; font-weight: 700; }
+
+/* ===== Easy-reading version ===== */
+:root {
+  --bg: #f6f8fc;
+  --surface: #ffffff;
+  --fg: #141c33;
+  --muted: #4a5570;
+  --line: #dbe2f0;
+  --accent: #1747c9;
+  --accent-soft: #e9effd;
+  --warn: #ffffff;
+  --warn-soft: #1747c9;
+  --bg-edge: #ffffff;
+  color-scheme: light;
+}
+body::before { display: none; }
+body { font-size: 1.125rem; line-height: 1.7; }
+.wrap { max-width: 42rem; gap: 2.5rem; }
+h2 { font-size: 1.85rem; color: var(--fg); }
+.lede { color: var(--fg); }
+a { color: var(--accent); }
+
+/* Creator site card: long text, so dark on white with a blue frame */
+.hub { background: var(--surface); color: var(--fg); border: 2px solid var(--accent); box-shadow: 0 8px 24px rgba(23, 71, 201, 0.12); }
+.hub .tag, .hub-link { background: var(--accent); color: #ffffff; }
+.hub .handles code { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-soft); }
+.video-frame { background: var(--accent-soft); border: 2px dashed var(--line); }
+.video-soon { color: var(--accent); }
+.key-points li.soon { border-color: var(--line); }
+.hub-video-label { color: var(--fg); }
+
+/* Cards and lists on white */
+.fact, .rule-col, .steps li, .expect-list li, .tiers, .callout { box-shadow: 0 2px 8px rgba(20, 28, 51, 0.05); }
+.fact span { color: var(--muted); }
+.day.go { background: var(--accent-soft); }
+.bios li { background: var(--surface); }
+.handles code { color: var(--fg); }
+.checklist label:hover { background: var(--accent-soft); }
+.toc { box-shadow: 0 2px 10px rgba(20, 28, 51, 0.06); }
+.toc a { color: var(--muted); }
+.toc a:hover { color: var(--fg); }
+.toc a.read::after { content: " ✓"; color: var(--accent); font-weight: 700; }
+.toc a.active.read::after { color: #ffffff; }
+
+/* Reading progress bar along the very top */
+.read-bar { position: fixed; top: 0; left: 0; height: 4px; width: 0; background: var(--accent); z-index: 20; transition: width 0.1s linear; }
+@media (prefers-reduced-motion: reduce) { .read-bar { transition: none; } }
+
+/* Read-time line under the intro */
+.read-meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.95rem; color: var(--muted); }
+.read-meta b { color: var(--fg); }
+
+/* "Part X of 5" labels */
+.part { display: inline-flex; align-items: center; gap: 0.5rem; }
+.part i { font-style: normal; background: var(--accent); color: #ffffff; border-radius: 999px; padding: 0.05rem 0.55rem; font-size: 0.75rem; letter-spacing: 0.04em; }
+
+/* "Up next" teasers between sections */
+.up-next { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 10px; padding: 0.85rem 1rem; }
+.up-next:hover { border-color: var(--accent); }
+.up-next small { display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); }
+.up-next span { font-weight: 700; }
+.up-next .arrow { margin-left: auto; font-size: 1.3rem; color: var(--accent); }
+
+/* Finish card */
+.finish { background: var(--accent); color: #ffffff; border-radius: 16px; padding: 1.4rem; display: flex; flex-direction: column; gap: 0.4rem; text-align: center; }
+.finish h3 { font-size: 1.45rem; font-weight: 800; }
 </style>
 </head>
 <body>
+<div class="read-bar" id="read-bar" aria-hidden="true"></div>
 <nav class="toc" aria-label="Page sections">
   <p class="toc-title">On this page</p>
   <ol>
@@ -289,11 +356,12 @@ html { scroll-behavior: smooth; }
     <p class="rank-badge"><span class="appstore-icon" role="img" aria-label="App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.8086 14.9194l6.1107-11.0368c.0837-.1513.1682-.302.2437-.4584.0685-.142.1267-.2854.1646-.4403.0803-.3259.0588-.6656-.066-.9767-.1238-.3095-.3417-.5678-.6201-.7355a1.4175 1.4175 0 0 0-.921-.1924c-.3207.043-.6135.1935-.8443.4288-.1094.1118-.1996.2361-.2832.369-.092.1463-.175.2979-.259.4492l-.3864.6979-.3865-.6979c-.0837-.1515-.1667-.303-.2587-.4492-.0837-.1329-.1739-.2572-.2835-.369-.2305-.2353-.5233-.3857-.844-.429a1.4181 1.4181 0 0 0-.921.1926c-.2784.1677-.4964.426-.6203.7355-.1246.311-.1461.6508-.066.9767.038.155.0962.2984.1648.4403.0753.1564.1598.307.2437.4584l1.248 2.2543-4.8625 8.7825H2.0295c-.1676 0-.3351-.0007-.5026.0092-.1522.009-.3004.0284-.448.0714-.3108.0906-.5822.2798-.7783.548-.195.2665-.3006.5929-.3006.9279 0 .3352.1057.6612.3006.9277.196.2683.4675.4575.7782.548.1477.043.296.0623.4481.0715.1675.01.335.009.5026.009h13.0974c.0171-.0357.059-.1294.1-.2697.415-1.4151-.6156-2.843-2.0347-2.843zM3.113 18.5418l-.7922 1.5008c-.0818.1553-.1644.31-.2384.4705-.067.1458-.124.293-.1611.452-.0785.3346-.0576.6834.0645 1.0029.1212.3175.3346.583.607.7549.2727.172.5891.2416.9013.1975.3139-.044.6005-.1986.8263-.4402.1072-.1148.1954-.2424.2772-.3787.0902-.1503.1714-.3059.2535-.4612L6 19.4636c-.0896-.149-.9473-1.4704-2.887-.9218m20.5861-3.0056a1.4707 1.4707 0 0 0-.779-.5407c-.1476-.0425-.2961-.0616-.4483-.0705-.1678-.0099-.3352-.0091-.503-.0091H18.648l-4.3891-7.817c-.6655.7005-.9632 1.485-1.0773 2.1976-.1655 1.0333.0367 2.0934.546 3.0004l5.2741 9.3933c.084.1494.167.299.2591.4435.0837.131.1739.2537.2836.364.231.2323.5238.3809.8449.4232.3192.0424.643-.0244.9217-.1899.2784-.1653.4968-.4204.621-.7257.1246-.3072.146-.6425.0658-.9641-.0381-.1529-.0962-.2945-.165-.4346-.0753-.1543-.1598-.303-.2438-.4524l-1.216-2.1662h1.596c.1677 0 .3351.0009.5029-.009.1522-.009.3007-.028.4483-.0705a1.4707 1.4707 0 0 0 .779-.5407A1.5386 1.5386 0 0 0 24 16.452a1.539 1.539 0 0 0-.3009-.9158Z"/></svg></span> Top 10 app in Health &amp; Fitness</p>
     <h1>Account Setup &amp; Warmup Guide</h1>
     <p class="lede">Before your first post, spend a few days using your new accounts the way a fan of healthy eating out and fitness would. This trains the algorithm to show your videos to the right people.</p>
+    <p class="read-meta"><span>⏱ <b>4-minute read</b></span><span>5 parts</span><span>💰 Your pay and bonuses are in Part 5, so read to the end</span></p>
   </header>
 
   <div class="hub" id="creator-site">
     <div class="hub-text">
-      <span class="tag">Start here</span>
+      <span class="tag">Part 1 of 5 · Start here</span>
       <h3>The MenuFit creator site</h3>
       <p>Every day the site gives you <b>3 scripts</b>. Those are your 3 videos for the day. Record them, upload the raw footage under <b>Videos</b>, and the site edits them for you and sends them back within a couple of minutes.</p>
       <p><b>No editing. Just record and post.</b> Bookmark it, you'll use it every day.</p>
@@ -338,8 +406,10 @@ html { scroll-behavior: smooth; }
     <div class="fact" role="listitem"><b>4</b><span>accounts: TikTok, Instagram, YouTube, Facebook</span></div>
   </div>
 
+  <a class="up-next" href="#schedule"><div><small>Up next</small><span>The 3-day warmup that takes a first post from 200 views to 1,000+</span></div><b class="arrow" aria-hidden="true">↓</b></a>
+
   <section id="schedule">
-    <p class="eyebrow">Step by step</p>
+    <p class="eyebrow part"><i>Part 2 of 5</i> Step by step</p>
     <h2>The warmup</h2>
     <ol class="timeline">
       <li class="day">
@@ -391,8 +461,10 @@ html { scroll-behavior: smooth; }
     </ol>
   </section>
 
+  <a class="up-next" href="#checklist"><div><small>Up next</small><span>Your 7-item checklist, so you know you're ready to post</span></div><b class="arrow" aria-hidden="true">↓</b></a>
+
   <section id="checklist">
-    <p class="eyebrow">Before you post</p>
+    <p class="eyebrow part"><i>Part 3 of 5</i> Before you post</p>
     <h2>Ready-to-post checklist</h2>
     <p>Your ticks are saved on this device only.</p>
     <ul class="checklist">
@@ -412,8 +484,10 @@ html { scroll-behavior: smooth; }
     <p id="ready" hidden>You're ready to film!</p>
   </section>
 
+  <a class="up-next" href="#post"><div><small>Up next</small><span>How to post, plus the one rule every post needs</span></div><b class="arrow" aria-hidden="true">↓</b></a>
+
   <section id="post">
-    <p class="eyebrow">After warmup</p>
+    <p class="eyebrow part"><i>Part 4 of 5</i> After warmup</p>
     <h2>Time to post</h2>
     <p>Your accounts are warmed up. Here's how to start posting.</p>
     <ol class="steps">
@@ -442,8 +516,10 @@ html { scroll-behavior: smooth; }
     </div>
   </section>
 
+  <a class="up-next" href="#pay"><div><small>Up next</small><span>Your pay: $1,000 a month, plus bonuses up to $800 per video</span></div><b class="arrow" aria-hidden="true">↓</b></a>
+
   <section id="pay">
-    <p class="eyebrow">Compensation</p>
+    <p class="eyebrow part"><i>Part 5 of 5</i> Compensation</p>
     <h2>The pay</h2>
     <div class="retainer">
       <span class="retainer-label">Base retainer</span>
@@ -468,6 +544,11 @@ html { scroll-behavior: smooth; }
       <p class="bonus-note">Bonuses don't stack. Each video earns the highest tier it reaches, so a 500,000-view video pays $800 (or $200 on Facebook).</p>
     </div>
   </section>
+
+  <div class="finish">
+    <h3>🎉 You made it to the end</h3>
+    <p>You're all caught up. Questions? Ask in your private creator Discord channel.</p>
+  </div>
 
   <footer>MenuFit creator program · Account warmup requirements</footer>
 </main>
@@ -530,6 +611,22 @@ html { scroll-behavior: smooth; }
       navigator.clipboard.writeText(text).then(function () { done("Copied!"); }, function () { done(text); });
     } else { done(text); }
   });
+})();
+(function () {
+  var bar = document.getElementById("read-bar");
+  var links = Array.prototype.slice.call(document.querySelectorAll(".toc a"));
+  function onScroll() {
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    var pct = max > 0 ? Math.min(1, window.scrollY / max) : 1;
+    bar.style.width = (pct * 100) + "%";
+    links.forEach(function (a) {
+      var t = document.querySelector(a.getAttribute("href"));
+      if (t && t.getBoundingClientRect().bottom < window.innerHeight * 0.6) a.classList.add("read");
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 })();
 </script>
 </body>
