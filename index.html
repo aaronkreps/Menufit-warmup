@@ -281,7 +281,8 @@ html { scroll-behavior: smooth; }
   --bg-edge: #ffffff;
   color-scheme: light;
 }
-body::before { display: none; }
+/* Soft blue fade at the screen edges; the reading column stays light */
+body::before { background: radial-gradient(ellipse 80% 75% at 50% 45%, var(--bg) 50%, #bfd0f7 100%); }
 body { font-size: 1.125rem; line-height: 1.7; }
 .wrap { max-width: 42rem; gap: 2.5rem; }
 h2 { font-size: 1.85rem; color: var(--fg); }
