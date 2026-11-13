@@ -365,7 +365,19 @@ a { color: var(--accent); }
 #day-1, #warming-up { scroll-margin-top: 4.5rem; }
 @media (min-width: 1100px) { #day-1, #warming-up { scroll-margin-top: 1.5rem; } }
 .light-warmup { background: var(--accent-soft); border: 1px solid var(--line); border-radius: 10px; padding: 0.7rem 0.9rem; }
+/* Pop-up card when the checklist is finished */
+.done-card { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: 1rem; background: rgba(20, 28, 51, 0.25); cursor: pointer; }
+.done-card[hidden] { display: none; }
+.done-inner { background: #ffffff; color: var(--fg); border: 3px solid var(--accent); border-radius: 20px; padding: 1.6rem 2rem; text-align: center; display: flex; flex-direction: column; gap: 0.35rem; box-shadow: 0 20px 60px rgba(23, 71, 201, 0.35); max-width: 22rem; }
+.done-inner b { font-family: var(--font-display); font-size: 1.7rem; font-weight: 800; color: var(--accent); line-height: 1.15; }
+.done-emoji { font-size: 3.2rem; line-height: 1; }
+.done-card.show .done-inner { animation: pop 0.55s cubic-bezier(0.2, 1.6, 0.4, 1) both; }
+.done-card.show .done-emoji { animation: wiggle 0.9s ease 0.35s both; }
+@keyframes pop { from { transform: scale(0.3); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes wiggle { 0%,100% { transform: rotate(0); } 20% { transform: rotate(-18deg) scale(1.2); } 40% { transform: rotate(14deg) scale(1.2); } 60% { transform: rotate(-8deg); } 80% { transform: rotate(5deg); } }
+@media (prefers-reduced-motion: reduce) { .done-card.show .done-inner, .done-card.show .done-emoji { animation: none; } }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
 </head>
 <body>
 <div class="read-bar" id="read-bar" aria-hidden="true"></div>
@@ -527,6 +539,13 @@ a { color: var(--accent); }
       <button type="button" class="reset" id="reset">Clear ticks</button>
     </div>
     <p id="ready" hidden>🎉 You're ready to film!</p>
+    <div class="done-card" id="done-card" role="status" hidden>
+      <div class="done-inner">
+        <div class="done-emoji" aria-hidden="true">🎉</div>
+        <b>You're ready to film!</b>
+        <p>8 of 8 done. Time to make your first video.</p>
+      </div>
+    </div>
   </section>
 
   <a class="up-next" href="#post"><div><small>Up next</small><span>How to post, plus the one rule every post needs</span></div><b class="arrow" aria-hidden="true">↓</b></a>
@@ -606,7 +625,7 @@ a { color: var(--accent); }
   try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { saved = {}; }
 
   // Confetti burst when the last box gets ticked (not on page load)
-  function confetti() {
+  function simpleConfetti() {
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     var c = document.createElement("canvas");
     c.setAttribute("aria-hidden", "true");
@@ -643,6 +662,48 @@ a { color: var(--accent); }
     })(start);
   }
 
+  // Big celebration: explosion from the checklist, side cannons, a 2.5s stream and a pop-up card
+  function celebrate(from) {
+    showCard();
+    if (navigator.vibrate) { try { navigator.vibrate([60, 40, 120]); } catch (e) {} }
+    var fx = window.confetti;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!fx) { simpleConfetti(); return; }
+    var colors = ["#1747c9", "#4f7cf0", "#ffc83d", "#2ecc71", "#ff6b6b", "#a46bff", "#ff9f1c"];
+    var r = from.getBoundingClientRect();
+    var origin = { x: (r.left + r.width / 2) / innerWidth, y: (r.top + r.height / 2) / innerHeight };
+    var base = { colors: colors, zIndex: 60, disableForReducedMotion: true };
+    // 1. Explosion from the box they just ticked
+    fx(Object.assign({}, base, { particleCount: 160, spread: 100, startVelocity: 55, scalar: 1.1, origin: origin }));
+    fx(Object.assign({}, base, { particleCount: 60, spread: 360, startVelocity: 35, shapes: ["star"], scalar: 1.4, origin: origin }));
+    // 2. Cannons from both bottom corners
+    setTimeout(function () {
+      fx(Object.assign({}, base, { particleCount: 120, angle: 60, spread: 70, startVelocity: 75, origin: { x: 0, y: 0.95 } }));
+      fx(Object.assign({}, base, { particleCount: 120, angle: 120, spread: 70, startVelocity: 75, origin: { x: 1, y: 0.95 } }));
+    }, 250);
+    // 3. Steady stream from the sides
+    var end = Date.now() + 2500;
+    (function stream() {
+      fx(Object.assign({}, base, { particleCount: 4, angle: 60, spread: 55, startVelocity: 60, origin: { x: 0, y: 0.7 } }));
+      fx(Object.assign({}, base, { particleCount: 4, angle: 120, spread: 55, startVelocity: 60, origin: { x: 1, y: 0.7 } }));
+      if (Date.now() < end) requestAnimationFrame(stream);
+    })();
+    // 4. Final shower from the top
+    setTimeout(function () {
+      fx(Object.assign({}, base, { particleCount: 200, spread: 160, startVelocity: 30, gravity: 0.8, ticks: 300, origin: { x: 0.5, y: -0.1 }, angle: 270 }));
+    }, 900);
+  }
+
+  function showCard() {
+    var card = document.getElementById("done-card");
+    card.hidden = false;
+    card.classList.remove("show"); void card.offsetWidth; card.classList.add("show");
+    clearTimeout(showCard.t);
+    showCard.t = setTimeout(hideCard, 3800);
+  }
+  function hideCard() { document.getElementById("done-card").hidden = true; }
+  document.getElementById("done-card").addEventListener("click", hideCard);
+
   function update() {
     var done = boxes.filter(function (b) { return b.checked; }).length;
     document.getElementById("bar").style.width = (done / boxes.length * 100) + "%";
@@ -658,7 +719,7 @@ a { color: var(--accent); }
     b.addEventListener("change", function () {
       var wasDone = !document.getElementById("ready").hidden;
       update();
-      if (!wasDone && !document.getElementById("ready").hidden) confetti();
+      if (!wasDone && !document.getElementById("ready").hidden) celebrate(b);
     });
   });
   document.getElementById("reset").addEventListener("click", function () {
